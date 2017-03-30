@@ -41,10 +41,6 @@ gulp.task('test', ['build-src', 'build-test'], (cb) => {
   }, cb).start();
 });
 
-gulp.task('bundle', () => gulp.src('src/js/bundle.js')
-			.pipe(browserify({ debug: true }))
-			.pipe(gulp.dest('build/js')));
-
 gulp.task('watch', ['browserSync'], () => {
   gulp.watch('src/js/**/*.js', browser.reload);
   gulp.watch('lib/js/**/*.js', browser.reload);
