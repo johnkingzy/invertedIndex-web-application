@@ -2,7 +2,7 @@
 // const myClass = new InvertedIndex();
 const allBooks = new myBook();
 const book = allBooks.getBook('books.json');
-myClass.createIndex('books.json', book);
+// myClass.createIndex('books.json', book);
 // const result = getIndex('books.json');
 
 /* My Suites */
