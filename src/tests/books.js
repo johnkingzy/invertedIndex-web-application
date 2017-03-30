@@ -2,37 +2,37 @@ class myBook {
   constructor() {
     this.books = {
       'books.json': [
-  {
-    "title": "Alice in Wonderland",
-    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
-  },
+        {
+          title: 'Alice in Wonderland',
+          text: 'Alice falls into a rabbit hole and enters a world full of imagination.'
+        },
 
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  },
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  },
-  {
-    "title": "Alice in Wonderland",
-    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
-  },
+        {
+          title: 'The Lord of the Rings: The Fellowship of the Ring.',
+          text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.'
+        },
+        {
+          title: 'The Lord of the Rings: The Fellowship of the Ring.',
+          text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.'
+        },
+        {
+          title: 'Alice in Wonderland',
+          text: 'Alice falls into a rabbit hole and enters a world full of imagination.'
+        },
 
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  },
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  }
-  ]
+        {
+          title: 'The Lord of the Rings: The Fellowship of the Ring.',
+          text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.'
+        },
+        {
+          title: 'The Lord of the Rings: The Fellowship of the Ring.',
+          text: 'An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring.'
+        }
+      ]
     };
   }
   getBook(bookName) {
-    if(this.books.hasOwnProperty(bookName)) {
+    if (this.books.hasOwnProperty(bookName)) {
       return this.books[bookName];
     }
   }
