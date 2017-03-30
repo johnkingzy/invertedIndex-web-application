@@ -47,7 +47,7 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('app/**/*.html', browser.reload);
 });
 
-gulp.task('build', ['build-src', 'build-test', 'bundle']);
+gulp.task('build', ['build-src', 'build-test']);
 
 gulp.task('default', ['build', 'test', 'browserSync']);
 
