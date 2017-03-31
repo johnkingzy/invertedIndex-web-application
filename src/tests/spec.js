@@ -1,16 +1,12 @@
 /* My Test Setups */
-// const myClass = new InvertedIndex();
-const allBooks = new myBook();
-const book = allBooks.getBook('books.json');
-// myClass.createIndex('books.json', book);
-// const result = getIndex('books.json');
+/* global describe it expect */
+import myBook from './books.json';
+import emptyBook from './emptyBook.json';
+import invalidKeys from './Invalidkeys.json';
 
 /* My Suites */
 describe('Class and Method Instantaion', () => {
-  let myClass;
-  beforeEach(() => {
-    myClass = new InvertedIndex();
-  });
+  const myClass = new InvertedIndex();
   it('Should contain the getIndex method', () => {
     expect(typeof myClass.getIndex).toBe('function');
   });
@@ -28,28 +24,45 @@ describe('Class and Method Instantaion', () => {
   });
 
   it('Should contain the tokenize method', () => {
-    expect(typeof myClass.tokenize).toBe('function');
+    expect(typeof InvertedIndex.tokenize).toBe('function');
   });
 
   it('Should contain the validateFile method', () => {
-    expect(typeof myClass.validateFile).toBe('function');
+    expect(typeof InvertedIndex.validateFile).toBe('function');
   });
 });
 
 describe('Populating Data', () => {
-  let myClass;
-  beforeEach(() => {
-    myClass = new InvertedIndex();
-  });
+  const myClass = new InvertedIndex();
   it('Should return true for creating Index', () => {
-    expect(myClass.createIndex('books.json', book)).toBeTruthy();
+    expect(myClass.createIndex('books.json', myBook)).toBeTruthy();
   });
 
-  it('Should return `file does not exist for unknown fileName', () => {
-    expect(myClass.getIndex('welcome')).toBe('File doesn\'t exist');
+  it('Should return `please enter a keyword to search', () => {
+    const search = () => {
+      myClass.searchIndex();
+    };
+    expect(search).toThrowError('please enter a keyword to search.');
   });
 
-  it('Should return `file does not exist for unknown fileName', () => {
-    expect(myClass.searchIndex('alice')).toBeTruthy();
+  it('Should return true for well formatted File', () => {
+    const book = JSON.stringify(myBook);
+    expect(InvertedIndex.validateFile(book, 'books.json')).toBeTruthy();
+  });
+
+  it('Should throw an error for empty books', () => {
+    const name = 'emptybook.json';
+    const checkEmptyBook = () => {
+      InvertedIndex.validateFile(emptyBook, name);
+    };
+    expect(checkEmptyBook).toThrowError();
+  });
+
+  it('Should throw an error for Invalid keys', () => {
+    const name = 'invalidKeys.json';
+    const invalidKey = () => {
+      InvertedIndex.validateFile(invalidKeys, name);
+    };
+    expect(invalidKey).toThrowError();
   });
 });

@@ -1,6 +1,7 @@
 const gulp = require('gulp'); // using the gulp module
 const babel = require('gulp-babel'); // using gulp babel
-const browser = require('browser-sync').create(); // create a browser sync instance.
+const browser = require('browser-sync').create(); // browser sync instance.
+
 
 const Server = require('karma').Server;
 
@@ -20,13 +21,12 @@ gulp.task('browserSync', () => {
   });
 });
 
-function build(src, dst) {
-  let pipe = gulp.src(src)
+const build = (src, dst) =>
+  gulp.src(src)
     .pipe(babel({
       presets: ['es2015']
-    })), dest = gulp.dest(dst);
-  return pipe.pipe(dest);
-}
+    }))
+    .pipe(gulp.dest(dst));
 
 gulp.task('build-src', () => build(paths.src, paths.dest));
 

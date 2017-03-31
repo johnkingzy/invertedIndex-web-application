@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Wed Mar 22 2017 10:35:40 GMT+0100 (WAT)
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,20 +10,24 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['browserify', 'jasmine'],
 
     plugins: [
       'karma-jasmine',
-      'karma-chrome-launcher'
+      'karma-chrome-launcher',
+      'karma-browserify'
     ],
 
     // list of files / patterns to load in the browser
     files: [
-      'tests/books.js',
       'build/js/invertindex.js',
       'build/tests/*.js',
     ],
 
+    browserify: {
+      // don't forget to register the extensions
+      extensions: ['.js', '.json']
+    },
 
     // list of files to exclude
     exclude: [
@@ -31,8 +35,10 @@ module.exports = function (config) {
 
 
     // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    // available preprocessors
+    // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'build/tests/*.js': ['browserify']
     },
 
 
@@ -51,16 +57,18 @@ module.exports = function (config) {
 
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values
     logLevel: config.LOG_INFO,
 
 
-    // enable / disable watching file and executing tests whenever any file changes
+    // enable
+    // disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
 
     // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    // available browser launchers
+    // https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
 
