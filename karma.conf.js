@@ -15,6 +15,7 @@ module.exports = (config) => {
     plugins: [
       'karma-jasmine',
       'karma-chrome-launcher',
+      'karma-coverage',
       'karma-browserify'
     ],
 
@@ -38,14 +39,18 @@ module.exports = (config) => {
     // available preprocessors
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'build/tests/*.js': ['browserify']
+      'build/tests/*.js': ['browserify', 'coverage'],
+      'build/js/invertindex.js': ['coverage']
     },
-
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'coverage/'
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port

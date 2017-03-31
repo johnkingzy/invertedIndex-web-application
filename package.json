@@ -13,7 +13,8 @@
     "gulp": "^3.9.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",
-    "karma-chrome-launcher": "^2.0.0"
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-amd": "^6.24.0",
