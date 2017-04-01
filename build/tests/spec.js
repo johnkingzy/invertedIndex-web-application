@@ -2,6 +2,9 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* My Test Setups */
 /* global describe it expect */
+/* global FileReader */
+/* global InvertedIndex */
+/* global File */
 
 
 var _books = require('./books.json');
@@ -42,7 +45,7 @@ describe('Class and Method Instantaion', function () {
   });
 
   it('Should contain the readFile method', function () {
-    expect(_typeof(myClass.readFile)).toBe('function');
+    expect(_typeof(InvertedIndex.readFile)).toBe('function');
   });
 
   it('Should contain the tokenize method', function () {
@@ -113,7 +116,7 @@ describe('Populating Data', function () {
   });
 
   it('Should return an array for the JSON File', function (done) {
-    var readFile = myClass.readFile(jsonFile);
+    var readFile = InvertedIndex.readFile(jsonFile);
     readFile.then(function (res) {
       expect(res[1][0].title).toBe('Alive on Wonderland');
       done();

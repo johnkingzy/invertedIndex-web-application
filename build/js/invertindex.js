@@ -4,6 +4,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/*eslint-disable */
+/* global FileReader */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
@@ -20,6 +22,7 @@ var InvertedIndex = function () {
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
+  /*eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName
@@ -89,11 +92,11 @@ var InvertedIndex = function () {
     key: 'getNumOfBooks',
     value: function getNumOfBooks(fileName) {
       var numOfBooks = this.indexedFiles[fileName];
-      var arr = [];
+      var indexArr = [];
       for (var i = 0; i < numOfBooks; i += 1) {
-        arr.push(i);
+        indexArr.push(i);
       }
-      return arr;
+      return indexArr;
     }
 
     /**
@@ -101,47 +104,6 @@ var InvertedIndex = function () {
      * @param {str} str
      * @returns {Array}
      * create index of the fileName
-     */
-
-  }, {
-    key: 'readFile',
-
-
-    /**
-     * @readFile method
-     * @param {currentFile} currentFile
-     * @returns {Array}
-     * reads the content of the book
-     */
-    value: function readFile(currentFile) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        var bookReader = new FileReader();
-        bookReader.onload = function onload() {
-          return function (readObj) {
-            var tranFile = [];
-            var fileName = currentFile.name;
-            var fileContent = readObj.target.result;
-            try {
-              InvertedIndex.validateFile(fileContent, fileName);
-              var content = JSON.parse(fileContent);
-              tranFile.push(fileName);
-              tranFile.push(content);
-              resolve(tranFile);
-            } catch (e) {
-              reject(e);
-            }
-          };
-        }(currentFile);
-        bookReader.readAsText(currentFile);
-      });
-    }
-    /**
-     * @validateFile method
-     * @param {fileContent} fileContent
-     * @param {fileName} fileName
-     * @returns {Boolean}
-     * reads the content of the book
      */
 
   }, {
@@ -218,6 +180,46 @@ var InvertedIndex = function () {
       value = value.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '').trim().toLowerCase().split(/\s+/);
       return value;
     }
+
+    /**
+     * @readFile method
+     * @param {currentFile} currentFile
+     * @returns {Array}
+     * reads the content of the book
+     */
+
+  }, {
+    key: 'readFile',
+    value: function readFile(currentFile) {
+      return new Promise(function (resolve, reject) {
+        var bookReader = new FileReader();
+        bookReader.onload = function onload() {
+          return function (readObj) {
+            var tranFile = [];
+            var fileName = currentFile.name;
+            var fileContent = readObj.target.result;
+            try {
+              InvertedIndex.validateFile(fileContent, fileName);
+              var content = JSON.parse(fileContent);
+              tranFile.push(fileName);
+              tranFile.push(content);
+              resolve(tranFile);
+            } catch (e) {
+              reject(e);
+            }
+          };
+        }(currentFile);
+        bookReader.readAsText(currentFile);
+      });
+    }
+    /**
+     * @validateFile method
+     * @param {fileContent} fileContent
+     * @param {fileName} fileName
+     * @returns {Boolean}
+     * reads the content of the book
+     */
+
   }, {
     key: 'validateFile',
     value: function validateFile(fileContent, fileName) {
@@ -233,10 +235,14 @@ var InvertedIndex = function () {
         throw new Error(_error2);
       }
       var content = JSON.parse(fileContent);
+      if (content.length === 0) {
+        var _error3 = fileName + ' is an empty JSON file';
+        throw new Error(_error3);
+      }
       content.forEach(function (elem) {
         if (!Object.keys(elem).includes('title') || !Object.keys(elem).includes('text')) {
-          var _error3 = 'OOPS!!! your file is not well formatted';
-          throw new Error(_error3);
+          var _error4 = 'OOPS!!! ' + fileName + ' does not contain title and text';
+          throw new Error(_error4);
         }
       });
       return true;
@@ -244,7 +250,7 @@ var InvertedIndex = function () {
   }, {
     key: 'cleanValues',
     value: function cleanValues(str) {
-      var value = str.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' ').toLowerCase().split(/\b\s+(?!$)/);
+      var value = str.replace(/[&\\#,+()$~%.'":*?<>{}]/g, ' ').toLowerCase().split(/\b\s+(?!$)/);
       return value;
     }
   }]);

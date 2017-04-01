@@ -1,10 +1,10 @@
-
+/*eslint-disable */
 /* global FileReader */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
  */
-export default class InvertedIndex {
+class InvertedIndex {
   /**
    * * @constructor
    * initialises the class base properties
@@ -14,6 +14,7 @@ export default class InvertedIndex {
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
+  /*eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName

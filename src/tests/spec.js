@@ -31,7 +31,7 @@ describe('Class and Method Instantaion', () => {
   });
 
   it('Should contain the readFile method', () => {
-    expect(typeof myClass.readFile).toBe('function');
+    expect(typeof InvertedIndex.readFile).toBe('function');
   });
 
   it('Should contain the tokenize method', () => {
@@ -103,7 +103,7 @@ describe('Populating Data', () => {
   });
 
   it('Should return an array for the JSON File', (done) => {
-    const readFile = myClass.readFile(jsonFile);
+    const readFile = InvertedIndex.readFile(jsonFile);
     readFile.then((res) => {
       expect(res[1][0].title).toBe('Alive on Wonderland');
       done();

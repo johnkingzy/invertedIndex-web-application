@@ -13,7 +13,7 @@ const paths = {
   spec: 'build/tests/*Spec.js'
 };
 
-gulp.task('browserSync', () => {
+gulp.task('browserSync', function () {
   browser.init({
     server: {
       baseDir: 'app'
