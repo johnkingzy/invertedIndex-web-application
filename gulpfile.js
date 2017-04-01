@@ -13,10 +13,10 @@ const paths = {
   spec: 'build/tests/*Spec.js'
 };
 
-gulp.task('browserSync', function () {
+gulp.task('browserSync', () => {
   browser.init({
     server: {
-      baseDir: 'app'
+      baseDir: './'
     }
   });
 });
@@ -44,7 +44,7 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('src/js/**/*.js', browser.reload);
   gulp.watch('lib/js/**/*.js', browser.reload);
   gulp.watch('lib/css/**/*.css', browser.reload);
-  gulp.watch('app/**/*.html', browser.reload);
+  gulp.watch('*.html', browser.reload);
 });
 
 gulp.task('build', ['build-src', 'build-test']);

@@ -1,8 +1,8 @@
 node_modules/
 lib/
-app/
 build/
 ReadMe.md
 npm-debug.log
 package.json
 coverage/
+index.html

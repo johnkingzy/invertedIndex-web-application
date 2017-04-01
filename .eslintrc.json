@@ -18,7 +18,6 @@
     "wrap-iife": [2, "inside"],
     "curly": ["error", "multi-line"],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
-    "import/no-unresolved": [2, { "commonjs": true }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
       "requireReturnType": true,

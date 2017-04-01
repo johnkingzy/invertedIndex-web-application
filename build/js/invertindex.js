@@ -132,7 +132,7 @@ var InvertedIndex = function () {
         var _error = 'No file has been indexed yet';
         throw new Error(_error);
       } else {
-        locations = Object.keys(this.indicies);
+        locations = locations || Object.keys(this.indicies);
       }
       locations.forEach(function (fileName) {
         var result = _this2.getResult(keyword, fileName);

@@ -170,7 +170,7 @@ class InvertedIndex {
       const error = 'No file has been indexed yet';
       throw new Error(error);
     } else {
-      locations = Object.keys(this.indicies);
+      locations = locations || Object.keys(this.indicies);
     }
     locations.forEach((fileName) => {
       const result = this.getResult(keyword, fileName);
