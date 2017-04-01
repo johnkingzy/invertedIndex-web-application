@@ -157,7 +157,7 @@ h4.side {
 
 
 h4.main-title {
-    background-color: #1aaad0;
+    background-color: #286092;
     padding: 0.8em 1em;
     color: #fff;
     text-transform: uppercase;
@@ -169,7 +169,7 @@ h4.main-title {
 }
 
 h4.upload-title {
-    background-color: #1aaad0;
+    background-color: #286092;
     padding: 0.8em 1em;
     color: #fff;
     text-transform: uppercase;
@@ -177,7 +177,7 @@ h4.upload-title {
     margin-top: 0px;
 }
 .search-btn {
-    background-color: #286092 !important;
+    background-color: #d8677d!important;
     color: #fff;
 }
 
@@ -186,17 +186,17 @@ h4.upload-title {
 }
 
 .upload-btn {
-    background-color: #1aaad0 !important;
+    background-color: #d8677d !important;
     color: #fff;
 }
 
 .create-btn {
-    background-color: #009f9f !important;
+    background-color: #d8677d !important;
     color: #fff;
 }
 
 h4.index-title {
-    background-color: #009f9f;
+    background-color: #286092;
     padding: 0.8em 1em;
     color: #fff;
     text-transform: uppercase;
@@ -205,7 +205,7 @@ h4.index-title {
 }
 
 h4.download-title {
-    background-color: #c75c5c;
+    background-color: #286092;
     padding: 0.8em 1em;
     color: #fff;
     text-transform: uppercase;

@@ -22,6 +22,7 @@ var _Invalidkeys2 = _interopRequireDefault(_Invalidkeys);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* My Suites */
+
 describe('Class and Method Instantaion', function () {
   var myClass = new InvertedIndex();
 

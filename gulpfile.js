@@ -1,6 +1,6 @@
 const gulp = require('gulp'); // using the gulp module
 const babel = require('gulp-babel'); // using gulp babel
-const browser = require('browser-sync').create(); // browser sync instance.
+const browser = require('browser-sync'); // browser sync instance.
 
 
 const Server = require('karma').Server;
