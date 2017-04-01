@@ -47,5 +47,4 @@ bower_components
 
 .DS_Store
 lib
-src/js
 app
