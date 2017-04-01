@@ -164,12 +164,12 @@ var InvertedIndex = function () {
         var error = 'please enter a keyword to search.';
         throw new Error(error);
       }
-      if (books.length < 1) {
+
+      self.finalResult = {};
+      if (!locations || books.length === 0) {
         var _error = 'No file has been indexed yet';
         throw new Error(_error);
-      }
-      self.finalResult = {};
-      if (locations.length === 0) {
+      } else {
         locations = Object.keys(this.indicies);
       }
       locations.forEach(function (fileName) {

@@ -21,6 +21,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* My Suites */
 describe('Class and Method Instantaion', function () {
   var myClass = new InvertedIndex();
+
+  it('Should be instantiated with the new keyword', function () {
+    var init = function init() {
+      InvertedIndex();
+    };
+    expect(init).toThrowError('Cannot call a class as a function');
+  });
+
   it('Should contain the getIndex method', function () {
     expect(_typeof(myClass.getIndex)).toBe('function');
   });
@@ -48,11 +56,21 @@ describe('Class and Method Instantaion', function () {
 
 describe('Populating Data', function () {
   var myClass = new InvertedIndex();
+  myClass.createIndex('books.json', _books2.default);
+  var getIndex = myClass.getIndex('books.json');
+  var jsonFile = new File([JSON.stringify(_books2.default)], 'books.json', { type: 'application/json' });
   it('Should return true for creating Index', function () {
     expect(myClass.createIndex('books.json', _books2.default)).toBeTruthy();
   });
 
-  it('Should return `please enter a keyword to search', function () {
+  it('Should return `No file has been indexed yet', function () {
+    var search = function search() {
+      myClass.searchIndex('alice');
+    };
+    expect(search).toThrowError();
+  });
+
+  it('Should return `please enter a keyword to search.`', function () {
     var search = function search() {
       myClass.searchIndex();
     };
@@ -77,6 +95,40 @@ describe('Populating Data', function () {
     var invalidKey = function invalidKey() {
       InvertedIndex.validateFile(_Invalidkeys2.default, name);
     };
-    expect(invalidKey).toThrowError();
+    expect(invalidKey).toThrowError('OOPS!!! ' + name + ' is not well formatted');
+  });
+
+  it('Should return an object for getIndex method', function () {
+    expect(typeof getIndex === 'undefined' ? 'undefined' : _typeof(getIndex)).toBe('object');
+  });
+
+  it('Should return an alive as the first token', function () {
+    var alltoken = Object.keys(getIndex);
+    expect(alltoken[0]).toBe('alive');
+  });
+
+  it('Should return the numbers of books in a file', function () {
+    var numOfBooks = myClass.getNumOfBooks('books.json');
+    expect(numOfBooks.length).toEqual(5);
+  });
+
+  it('Should return an array for the JSON File', function (done) {
+    var readFile = myClass.readFile(jsonFile);
+    readFile.then(function (res) {
+      expect(res[1][0].title).toBe('Alive on Wonderland');
+      done();
+    });
+  });
+
+  it('Should return throw an error for Invalid file Extension', function () {
+    var validate = function validate() {
+      InvertedIndex.validateFile('result', 'sample.txt');
+    };
+    var error = 'sample.txt has an Invalid File extension, JSON only';
+    expect(validate).toThrowError(error);
+  });
+
+  it('Should return an array of clean values', function () {
+    expect(InvertedIndex.cleanValues('How, are, you doing today')).toEqual(['how', 'are', 'you', 'doing', 'today']);
   });
 });
