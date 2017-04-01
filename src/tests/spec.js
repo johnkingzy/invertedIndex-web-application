@@ -1,5 +1,8 @@
 /* My Test Setups */
 /* global describe it expect */
+/* global FileReader */
+/* global InvertedIndex */
+/* global File */
 import myBook from './books.json';
 import emptyBook from './emptyBook.json';
 import invalidKeys from './Invalidkeys.json';

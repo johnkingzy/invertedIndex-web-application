@@ -15,6 +15,7 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
+    "wrap-iife": [2, "inside"],
     "curly": ["error", "multi-line"],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "import/no-unresolved": [2, { "commonjs": true }],

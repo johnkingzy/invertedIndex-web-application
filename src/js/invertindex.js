@@ -1,9 +1,10 @@
 
+/* global FileReader */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
  */
-class InvertedIndex {
+export default class InvertedIndex {
   /**
    * * @constructor
    * initialises the class base properties
@@ -92,8 +93,7 @@ class InvertedIndex {
    * @returns {Array}
    * reads the content of the book
    */
-  readFile(currentFile) {
-    const self = this;
+  static readFile(currentFile) {
     return new Promise((resolve, reject) => {
       const bookReader = new FileReader();
       bookReader.onload = (function onload() {
@@ -146,7 +146,6 @@ class InvertedIndex {
         throw new Error(error);
       }
     });
-    console.log(content.length)
     return true;
   }
 
@@ -208,7 +207,7 @@ class InvertedIndex {
    * cleans the keyword for search
    */
   static cleanValues(str) {
-    const value = str.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' ')
+    const value = str.replace(/[&\\#,+()$~%.'":*?<>{}]/g, ' ')
     .toLowerCase()
     .split(/\b\s+(?!$)/);
     return value;
