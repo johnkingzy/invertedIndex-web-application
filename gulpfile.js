@@ -20,7 +20,6 @@ gulp.task('browserSync', () => {
     }
   });
 });
-
 const build = (src, dst) =>
   gulp.src(src)
     .pipe(babel({

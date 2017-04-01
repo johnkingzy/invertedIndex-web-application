@@ -8,6 +8,7 @@ import emptyBook from './emptyBook.json';
 import invalidKeys from './Invalidkeys.json';
 
 /* My Suites */
+
 describe('Class and Method Instantaion', () => {
   const myClass = new InvertedIndex();
 
