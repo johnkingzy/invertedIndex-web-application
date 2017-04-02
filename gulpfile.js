@@ -43,10 +43,10 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('src/js/**/*.js', browser.reload);
   gulp.watch('lib/js/**/*.js', browser.reload);
   gulp.watch('lib/css/**/*.css', browser.reload);
-  gulp.watch('*.html', browser.reload);
+  gulp.watch('**.html', browser.reload);
 });
 
 gulp.task('build', ['build-src', 'build-test']);
 
-gulp.task('default', ['build', 'test', 'browserSync']);
+gulp.task('default', ['build', 'test', 'watch']);
 

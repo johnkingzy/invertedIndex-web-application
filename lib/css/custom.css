@@ -340,6 +340,8 @@ ul#menu li {
     }
 
 }
+
+
 @media (min-width:767px) {
     .navbar-nav {
     margin-left: 600px;
