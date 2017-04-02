@@ -7,3 +7,4 @@ package.json
 coverage/
 index.html
 codeclimate-config.patch
+public/lib
