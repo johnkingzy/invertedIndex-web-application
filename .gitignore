@@ -46,3 +46,7 @@ node_modules/
 !.vscode/extensions.json
 
 .DS_Store
+lib/
+src/css/
+node_modules/
+build/js/

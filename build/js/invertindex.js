@@ -4,7 +4,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/*eslint-disable */
 /* global FileReader */
 /**
  * @class InvertedIndex
@@ -22,7 +21,6 @@ var InvertedIndex = function () {
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
-  /*eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName

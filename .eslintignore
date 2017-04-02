@@ -7,3 +7,7 @@ package.json
 coverage/
 index.html
 codeclimate-config.patch
+lib/images/
+src/css
+src/images
+src/fonts
