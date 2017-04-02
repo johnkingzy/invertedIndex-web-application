@@ -3,7 +3,7 @@ logs
 *.log
 npm-debug.log*
 
-# Runtime data
+# Runtime da
 pids
 *.pid
 *.seed

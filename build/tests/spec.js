@@ -124,7 +124,7 @@ describe('Populating Data', function () {
     });
   });
 
-  it('Should return throw an error for Invalid file Extension', function () {
+  it('Should throw an error for Invalid file Extension', function () {
     var validate = function validate() {
       InvertedIndex.validateFile('result', 'sample.txt');
     };
@@ -134,5 +134,17 @@ describe('Populating Data', function () {
 
   it('Should return an array of clean values', function () {
     expect(InvertedIndex.cleanValues('How, are, you doing today')).toEqual(['how', 'are', 'you', 'doing', 'today']);
+  });
+
+  it('Should return an empty array for alice', function () {
+    myClass.createIndex('books.json', _books2.default);
+    var output = myClass.getResult('alice', ['books.json']);
+    expect(output.alice).toEqual([]);
+  });
+
+  it('Should return an object', function () {
+    myClass.createIndex('books.json', _books2.default);
+    var output = myClass.getResult('wonderland', ['books.json']);
+    expect(typeof output === 'undefined' ? 'undefined' : _typeof(output)).toBe('object');
   });
 });

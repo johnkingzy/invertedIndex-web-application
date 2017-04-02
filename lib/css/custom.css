@@ -335,13 +335,29 @@ ul#menu li {
     padding: 12px 6px;
 }
 
+.navbar-nav {
+    margin-left: 0px;
+    }
+
 }
+@media (min-width:767px) {
+    .navbar-nav {
+    margin-left: 600px;
+    }
+	}
 @media (max-width:767px) {
-		
+    .navbar-nav {
+    margin-left: 250px;
+    }
 	}
 	@media (max-width:640px) {
-	
+	.navbar-nav {
+    margin-left: 0px;
+    }
 }
 	@media (max-width: 480px) {
-		
+	.navbar-nav {
+    margin-left: 0px;
+    }
 	}
+}
