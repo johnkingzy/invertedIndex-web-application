@@ -39,9 +39,8 @@ module.exports = (config) => {
     // available preprocessors
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'build/tests/*.js': ['browserify'],
-      'src/tests/*.js': ['coverage'],
-      'src/js/invertindex.js': ['coverage']
+      'build/tests/*.js': ['browserify', 'coverage'],
+      'build/js/invertindex.js': ['coverage']
     },
     coverageReporter: {
       type: 'lcov',
