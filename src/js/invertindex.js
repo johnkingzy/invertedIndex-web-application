@@ -1,20 +1,20 @@
 /* global FileReader */
-/* eslint-disable */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
  */
+/* eslint-disable */
 class InvertedIndex {
+    /* eslint-enable */
   /**
    * * @constructor
    * initialises the class base properties
    */
   constructor() {
-    this.indicies = {};
+    this.indices = {};
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
-  /* eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName
@@ -23,27 +23,29 @@ class InvertedIndex {
    * create index of the fileName
    */
   createIndex(fileName, fileContent) {
-    this.indicies[fileName] = this.indicies[fileName] || {};
+    this.indices[fileName] = this.indices[fileName] || {};
     const numOfBooks = fileContent.length;
     for (let bookIndex = 0; bookIndex <
       numOfBooks; bookIndex += 1) {
       const { title, text } = fileContent[bookIndex];
       const tokens = InvertedIndex.tokenize(`${title} ${text}`);
-      const indicies = this.indicies[fileName];
+      const indices = this.indices[fileName];
       tokens.forEach((token) => {
-        if (token in indicies) {
-          const eachToken = indicies[token];
+        // if token exist in indices
+        if (token in indices) {
+          const eachToken = indices[token];
           if (eachToken.indexOf(bookIndex) === -1) {
-            indicies[token].push(bookIndex);
+            indices[token].push(bookIndex);
           }
         } else {
-          // Initially this is what happens
-          indicies[token] = [bookIndex];
+          // if token does not exist in indices
+          indices[token] = [bookIndex];
         }
       });
     }
 
     this.indexedFiles[fileName] = numOfBooks;
+    console.log(this.indexedFiles);
     return true;
   }
 
@@ -54,7 +56,7 @@ class InvertedIndex {
    * gets the index of the fileName
    */
   getIndex(fileName) {
-    return this.indicies[fileName];
+    return this.indices[fileName];
   }
 
    /**
@@ -129,13 +131,13 @@ class InvertedIndex {
       const error = `${fileName} has an Invalid File extension, JSON only`;
       throw new Error(error);
     }
+    let content;
     try {
-      JSON.parse(fileContent);
+      content = JSON.parse(fileContent);
     } catch (e) {
       const error = `OOPS!!! ${fileName} is not well formatted`;
       throw new Error(error);
     }
-    const content = JSON.parse(fileContent);
     if (content.length === 0) {
       const error = `${fileName} is an empty JSON file`;
       throw new Error(error);
@@ -158,23 +160,21 @@ class InvertedIndex {
    * reads the content of the book
    */
   searchIndex(keyword, locations) {
-    const self = this;
-    const books = Object.keys(self.indicies);
+    const books = Object.keys(this.indices);
     if (!keyword) {
       const error = 'please enter a keyword to search.';
       throw new Error(error);
     }
-
-    self.finalResult = {};
+    this.finalResult = {};
     if (!locations || books.length === 0) {
       const error = 'No file has been indexed yet';
       throw new Error(error);
     } else {
-      locations = locations || Object.keys(this.indicies);
+      locations = locations || Object.keys(this.indices);
     }
     locations.forEach((fileName) => {
       const result = this.getResult(keyword, fileName);
-      self.finalResult[fileName] = result;
+      this.finalResult[fileName] = result;
     });
     return true;
   }
@@ -184,13 +184,13 @@ class InvertedIndex {
    * @param {keyword} keyword
    * @param {fileName} fileName
    * @returns {Array}
-   * get the result of the keyword from the indicies
+   * get the result of the keyword from the indices
    */
   getResult(keyword, fileName) {
     const searchResult = {};
     const keywords = InvertedIndex.cleanValues(keyword);
-    const fileIndex = this.indicies[fileName];
-    const currentToken = Object.keys(this.indicies[fileName]);
+    const fileIndex = this.indices[fileName];
+    const currentToken = Object.keys(this.indices[fileName]);
     keywords.forEach((elem) => {
       if (currentToken.includes(elem)) {
         searchResult[elem] = fileIndex[elem];
