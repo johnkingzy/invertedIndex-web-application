@@ -1,6 +1,6 @@
 node_modules/
 lib/
-build/
+build/js
 ReadMe.md
 npm-debug.log
 package.json
@@ -11,3 +11,4 @@ lib/images/
 src/css
 src/images
 src/fonts
+build/tests
