@@ -21,7 +21,7 @@ Using this app is very simple and intuitive,
 Follow the steps below to run the application locally on your machine.
 
 Clone the repository: git clone <THIS_REPOSITORY_URL>
-Enter into the apps directory by running cd Checkpoint1-Inverted-Index
+Enter into the apps directory by running cd invertedIndex
 Install npm packages npm install
 Run the app by typing gulp
 
@@ -44,12 +44,12 @@ Run the app by typing gulp
 
 ![alt text][logo]
 
-[logo]: https://github.com/andela-ksolomon/invertedIndex/tree/developing/lib/images/screenshot-page.png "Inverted Index By Solomon Kingsley"
+[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/screenshot-page.png "Inverted Index By Solomon Kingsley"
 
 ![alt text][logo]
 
-[logo]: https://github.com/andela-ksolomon/invertedIndex/tree/developing/lib/images/screenshot-page1.png "Inverted Index By Solomon Kingsley"
+[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/screenshot-page1.png "Inverted Index By Solomon Kingsley"
 
 ![alt text][logo]
 
-[logo]: https://github.com/andela-ksolomon/invertedIndex/tree/developing/lib/images/screenshot-page2.png "Inverted Index By Solomon Kingsley"
+[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/screenshot-page2.png "Inverted Index By Solomon Kingsley"
