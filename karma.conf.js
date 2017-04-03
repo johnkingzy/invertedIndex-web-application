@@ -40,7 +40,6 @@ module.exports = (config) => {
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'build/tests/*.js': ['browserify'],
-      'build/js/invertindex.js': ['coverage'],
       'src/tests/*.js': ['coverage'],
       'src/js/invertindex.js': ['coverage']
     },
