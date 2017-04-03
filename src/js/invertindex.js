@@ -1,4 +1,5 @@
 /* global FileReader */
+/* eslint-disable */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
@@ -13,6 +14,7 @@ class InvertedIndex {
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
+  /* eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName
