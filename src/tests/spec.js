@@ -95,18 +95,18 @@ describe('Populating Data', () => {
 
   it('Should return an alive as the first token', () => {
     const alltoken = Object.keys(getIndex);
-    expect(alltoken[0]).toBe('alive');
+    expect(alltoken[0]).toBe('alice');
   });
 
   it('Should return the numbers of books in a file', () => {
     const numOfBooks = myClass.getNumOfBooks('books.json');
-    expect(numOfBooks.length).toEqual(5);
+    expect(numOfBooks.length).toEqual(6);
   });
 
   it('Should return an array for the JSON File', (done) => {
     const readFile = InvertedIndex.readFile(jsonFile);
     readFile.then((res) => {
-      expect(res[1][0].title).toBe('Alive on Wonderland');
+      expect(res[1][0].title).toBe('Alice in Wonderland');
       done();
     });
   });
@@ -124,10 +124,10 @@ describe('Populating Data', () => {
     .toEqual(['how', 'are', 'you', 'doing', 'today']);
   });
 
-  it('Should return an empty array for alice', () => {
+  it('Should return [0, 3] for alice', () => {
     myClass.createIndex('books.json', myBook);
     const output = myClass.getResult('alice', ['books.json']);
-    expect(output.alice).toEqual([]);
+    expect(output.alice).toEqual([0, 3]);
   });
 
   it('Should return an object', () => {
