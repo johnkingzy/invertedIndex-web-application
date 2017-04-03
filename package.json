@@ -32,7 +32,7 @@
     "requirejs": "^2.1.11"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "gulp build && gulp test",
     "eslint": "eslint *"
   },
   "author": "maximuf",

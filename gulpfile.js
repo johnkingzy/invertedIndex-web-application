@@ -8,9 +8,9 @@ const Server = require('karma').Server;
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
-  specSrc: 'src/tests/*Spec.js',
+  specSrc: 'src/tests/*.js',
   specDest: 'build/tests',
-  spec: 'build/tests/*Spec.js'
+  spec: 'build/tests/*.js'
 };
 
 gulp.task('browserSync', () => {
