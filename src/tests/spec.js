@@ -8,7 +8,6 @@ import emptyBook from './emptyBook.json';
 import invalidKeys from './Invalidkeys.json';
 
 /* My Suites */
-
 describe('Class and Method Instantaion', () => {
   const myClass = new InvertedIndex();
 
@@ -111,7 +110,7 @@ describe('Populating Data', () => {
     });
   });
 
-  it('Should throw an error for Invalid file Extension', () => {
+  it('Should return throw an error for Invalid file Extension', () => {
     const validate = () => {
       InvertedIndex.validateFile('result', 'sample.txt');
     };
@@ -122,17 +121,5 @@ describe('Populating Data', () => {
   it('Should return an array of clean values', () => {
     expect(InvertedIndex.cleanValues('How, are, you doing today'))
     .toEqual(['how', 'are', 'you', 'doing', 'today']);
-  });
-
-  it('Should return [0, 3] for alice', () => {
-    myClass.createIndex('books.json', myBook);
-    const output = myClass.getResult('alice', ['books.json']);
-    expect(output.alice).toEqual([0, 3]);
-  });
-
-  it('Should return an object', () => {
-    myClass.createIndex('books.json', myBook);
-    const output = myClass.getResult('wonderland', ['books.json']);
-    expect(typeof output).toBe('object');
   });
 });

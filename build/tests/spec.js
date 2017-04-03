@@ -22,7 +22,6 @@ var _Invalidkeys2 = _interopRequireDefault(_Invalidkeys);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* My Suites */
-
 describe('Class and Method Instantaion', function () {
   var myClass = new InvertedIndex();
 
@@ -124,7 +123,7 @@ describe('Populating Data', function () {
     });
   });
 
-  it('Should throw an error for Invalid file Extension', function () {
+  it('Should return throw an error for Invalid file Extension', function () {
     var validate = function validate() {
       InvertedIndex.validateFile('result', 'sample.txt');
     };
@@ -134,17 +133,5 @@ describe('Populating Data', function () {
 
   it('Should return an array of clean values', function () {
     expect(InvertedIndex.cleanValues('How, are, you doing today')).toEqual(['how', 'are', 'you', 'doing', 'today']);
-  });
-
-  it('Should return [0, 3] for alice', function () {
-    myClass.createIndex('books.json', _books2.default);
-    var output = myClass.getResult('alice', ['books.json']);
-    expect(output.alice).toEqual([0, 3]);
-  });
-
-  it('Should return an object', function () {
-    myClass.createIndex('books.json', _books2.default);
-    var output = myClass.getResult('wonderland', ['books.json']);
-    expect(typeof output === 'undefined' ? 'undefined' : _typeof(output)).toBe('object');
   });
 });

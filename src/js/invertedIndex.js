@@ -1,17 +1,18 @@
 /* global FileReader */
+/* global InvertedIndex */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
  */
 /* eslint-disable */
 class InvertedIndex {
-    /* eslint-enable */
+  /* eslint-enable */
   /**
    * * @constructor
    * initialises the class base properties
    */
   constructor() {
-    this.indices = {};
+    this.indicies = {};
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
@@ -23,29 +24,27 @@ class InvertedIndex {
    * create index of the fileName
    */
   createIndex(fileName, fileContent) {
-    this.indices[fileName] = this.indices[fileName] || {};
+    this.indicies[fileName] = this.indicies[fileName] || {};
     const numOfBooks = fileContent.length;
     for (let bookIndex = 0; bookIndex <
       numOfBooks; bookIndex += 1) {
       const { title, text } = fileContent[bookIndex];
       const tokens = InvertedIndex.tokenize(`${title} ${text}`);
-      const indices = this.indices[fileName];
+      const indicies = this.indicies[fileName];
       tokens.forEach((token) => {
-        // if token exist in indices
-        if (token in indices) {
-          const eachToken = indices[token];
+        if (token in indicies) {
+          const eachToken = indicies[token];
           if (eachToken.indexOf(bookIndex) === -1) {
-            indices[token].push(bookIndex);
+            indicies[token].push(bookIndex);
           }
         } else {
-          // if token does not exist in indices
-          indices[token] = [bookIndex];
+          // Initially this is what happens
+          indicies[token] = [bookIndex];
         }
       });
     }
 
     this.indexedFiles[fileName] = numOfBooks;
-    console.log(this.indexedFiles);
     return true;
   }
 
@@ -56,7 +55,7 @@ class InvertedIndex {
    * gets the index of the fileName
    */
   getIndex(fileName) {
-    return this.indices[fileName];
+    return this.indicies[fileName];
   }
 
    /**
@@ -143,8 +142,7 @@ class InvertedIndex {
       throw new Error(error);
     }
     content.forEach((elem) => {
-      if (!Object.keys(elem).includes('title')
-          || !Object.keys(elem).includes('text')) {
+      if (!elem.title || !elem.text) {
         const error = `OOPS!!! ${fileName} does not contain title and text`;
         throw new Error(error);
       }
@@ -160,17 +158,18 @@ class InvertedIndex {
    * reads the content of the book
    */
   searchIndex(keyword, locations) {
-    const books = Object.keys(this.indices);
+    const books = Object.keys(this.indicies);
     if (!keyword) {
       const error = 'please enter a keyword to search.';
       throw new Error(error);
     }
+
     this.finalResult = {};
     if (!locations || books.length === 0) {
       const error = 'No file has been indexed yet';
       throw new Error(error);
     } else {
-      locations = locations || Object.keys(this.indices);
+      locations = locations || Object.keys(this.indicies);
     }
     locations.forEach((fileName) => {
       const result = this.getResult(keyword, fileName);
@@ -184,13 +183,13 @@ class InvertedIndex {
    * @param {keyword} keyword
    * @param {fileName} fileName
    * @returns {Array}
-   * get the result of the keyword from the indices
+   * get the result of the keyword from the indicies
    */
   getResult(keyword, fileName) {
     const searchResult = {};
     const keywords = InvertedIndex.cleanValues(keyword);
-    const fileIndex = this.indices[fileName];
-    const currentToken = Object.keys(this.indices[fileName]);
+    const fileIndex = this.indicies[fileName];
+    const currentToken = Object.keys(this.indicies[fileName]);
     keywords.forEach((elem) => {
       if (currentToken.includes(elem)) {
         searchResult[elem] = fileIndex[elem];

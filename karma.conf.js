@@ -21,7 +21,7 @@ module.exports = (config) => {
 
     // list of files / patterns to load in the browser
     files: [
-      'build/js/invertindex.js',
+      'build/js/invertedIndex.js',
       'build/tests/*.js',
     ],
 
@@ -40,7 +40,7 @@ module.exports = (config) => {
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'build/tests/*.js': ['browserify', 'coverage'],
-      'build/js/invertindex.js': ['coverage']
+      'build/js/invertedIndex.js': ['coverage']
     },
     coverageReporter: {
       type: 'lcov',
