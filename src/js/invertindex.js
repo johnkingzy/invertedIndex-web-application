@@ -101,9 +101,9 @@ class InvertedIndex {
       const bookReader = new FileReader();
       bookReader.onload = (function onload() {
         return (readObj) => {
-          const tranFile = [];
-          const fileName = currentFile.name;
-          const fileContent = readObj.target.result;
+          const tranFile = [],
+            fileName = currentFile.name,
+            fileContent = readObj.target.result;
           try {
             InvertedIndex.validateFile(fileContent, fileName);
             const content = JSON.parse(fileContent);

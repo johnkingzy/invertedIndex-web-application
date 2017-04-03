@@ -8,7 +8,6 @@ import emptyBook from './emptyBook.json';
 import invalidKeys from './Invalidkeys.json';
 
 /* My Suites */
-
 describe('Class and Method Instantaion', () => {
   const myClass = new InvertedIndex();
 
@@ -95,23 +94,23 @@ describe('Populating Data', () => {
 
   it('Should return an alive as the first token', () => {
     const alltoken = Object.keys(getIndex);
-    expect(alltoken[0]).toBe('alice');
+    expect(alltoken[0]).toBe('alive');
   });
 
   it('Should return the numbers of books in a file', () => {
     const numOfBooks = myClass.getNumOfBooks('books.json');
-    expect(numOfBooks.length).toEqual(6);
+    expect(numOfBooks.length).toEqual(5);
   });
 
   it('Should return an array for the JSON File', (done) => {
     const readFile = InvertedIndex.readFile(jsonFile);
     readFile.then((res) => {
-      expect(res[1][0].title).toBe('Alice in Wonderland');
+      expect(res[1][0].title).toBe('Alive on Wonderland');
       done();
     });
   });
 
-  it('Should throw an error for Invalid file Extension', () => {
+  it('Should return throw an error for Invalid file Extension', () => {
     const validate = () => {
       InvertedIndex.validateFile('result', 'sample.txt');
     };
@@ -122,17 +121,5 @@ describe('Populating Data', () => {
   it('Should return an array of clean values', () => {
     expect(InvertedIndex.cleanValues('How, are, you doing today'))
     .toEqual(['how', 'are', 'you', 'doing', 'today']);
-  });
-
-  it('Should return [0, 3] for alice', () => {
-    myClass.createIndex('books.json', myBook);
-    const output = myClass.getResult('alice', ['books.json']);
-    expect(output.alice).toEqual([0, 3]);
-  });
-
-  it('Should return an object', () => {
-    myClass.createIndex('books.json', myBook);
-    const output = myClass.getResult('wonderland', ['books.json']);
-    expect(typeof output).toBe('object');
   });
 });

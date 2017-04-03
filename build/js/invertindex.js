@@ -4,14 +4,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/*eslint-disable */
 /* global FileReader */
 /**
  * @class InvertedIndex
  * @classdesc blah blah
  */
-/* eslint-disable */
 var InvertedIndex = function () {
-  /* eslint-enable */
   /**
    * * @constructor
    * initialises the class base properties
@@ -19,10 +18,11 @@ var InvertedIndex = function () {
   function InvertedIndex() {
     _classCallCheck(this, InvertedIndex);
 
-    this.indices = {};
+    this.indicies = {};
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
+  /*eslint-enable */
   /**
    * @createIndex method
    * @param {fileName} fileName
@@ -37,7 +37,7 @@ var InvertedIndex = function () {
     value: function createIndex(fileName, fileContent) {
       var _this = this;
 
-      this.indices[fileName] = this.indices[fileName] || {};
+      this.indicies[fileName] = this.indicies[fileName] || {};
       var numOfBooks = fileContent.length;
 
       var _loop = function _loop(bookIndex) {
@@ -46,17 +46,16 @@ var InvertedIndex = function () {
             text = _fileContent$bookInde.text;
 
         var tokens = InvertedIndex.tokenize(title + ' ' + text);
-        var indices = _this.indices[fileName];
+        var indicies = _this.indicies[fileName];
         tokens.forEach(function (token) {
-          // if token exist in indices
-          if (token in indices) {
-            var eachToken = indices[token];
+          if (token in indicies) {
+            var eachToken = indicies[token];
             if (eachToken.indexOf(bookIndex) === -1) {
-              indices[token].push(bookIndex);
+              indicies[token].push(bookIndex);
             }
           } else {
-            // if token does not exist in indices
-            indices[token] = [bookIndex];
+            // Initially this is what happens
+            indicies[token] = [bookIndex];
           }
         });
       };
@@ -79,7 +78,7 @@ var InvertedIndex = function () {
   }, {
     key: 'getIndex',
     value: function getIndex(fileName) {
-      return this.indices[fileName];
+      return this.indicies[fileName];
     }
 
     /**
@@ -121,21 +120,23 @@ var InvertedIndex = function () {
     value: function searchIndex(keyword, locations) {
       var _this2 = this;
 
-      var books = Object.keys(this.indices);
+      var self = this;
+      var books = Object.keys(self.indicies);
       if (!keyword) {
         var error = 'please enter a keyword to search.';
         throw new Error(error);
       }
-      this.finalResult = {};
+
+      self.finalResult = {};
       if (!locations || books.length === 0) {
         var _error = 'No file has been indexed yet';
         throw new Error(_error);
       } else {
-        locations = locations || Object.keys(this.indices);
+        locations = locations || Object.keys(this.indicies);
       }
       locations.forEach(function (fileName) {
         var result = _this2.getResult(keyword, fileName);
-        _this2.finalResult[fileName] = result;
+        self.finalResult[fileName] = result;
       });
       return true;
     }
@@ -145,7 +146,7 @@ var InvertedIndex = function () {
      * @param {keyword} keyword
      * @param {fileName} fileName
      * @returns {Array}
-     * get the result of the keyword from the indices
+     * get the result of the keyword from the indicies
      */
 
   }, {
@@ -153,8 +154,8 @@ var InvertedIndex = function () {
     value: function getResult(keyword, fileName) {
       var searchResult = {};
       var keywords = InvertedIndex.cleanValues(keyword);
-      var fileIndex = this.indices[fileName];
-      var currentToken = Object.keys(this.indices[fileName]);
+      var fileIndex = this.indicies[fileName];
+      var currentToken = Object.keys(this.indicies[fileName]);
       keywords.forEach(function (elem) {
         if (currentToken.includes(elem)) {
           searchResult[elem] = fileIndex[elem];
@@ -227,13 +228,13 @@ var InvertedIndex = function () {
         var error = fileName + ' has an Invalid File extension, JSON only';
         throw new Error(error);
       }
-      var content = void 0;
       try {
-        content = JSON.parse(fileContent);
+        JSON.parse(fileContent);
       } catch (e) {
         var _error2 = 'OOPS!!! ' + fileName + ' is not well formatted';
         throw new Error(_error2);
       }
+      var content = JSON.parse(fileContent);
       if (content.length === 0) {
         var _error3 = fileName + ' is an empty JSON file';
         throw new Error(_error3);
