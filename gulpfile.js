@@ -7,9 +7,10 @@ const Server = require('karma').Server;
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
-  specSrc: 'src/tests/',
-  specDest: 'build/tests',
-  spec: 'build/tests/'
+  specSrc: 'src/**/*spec.js',
+  specDest: 'build/',
+  jsonSrc: 'src/**/*.json',
+  jsonDest: 'build/'
 };
 
 gulp.task('browserSync', () => {
@@ -32,8 +33,13 @@ gulp.task('build-src', () => build(paths.src, paths.dest));
 
 gulp.task('build-test', () => build(paths.specSrc, paths.specDest));
 
+gulp.task('build-json', () => {
+  gulp.src(paths.jsonSrc)
+    .pipe(gulp.dest(paths.jsonDest));
+});
+
 // Run the unit tests without any coverage calculations
-gulp.task('test', ['build-src', 'build-test'], (cb) => {
+gulp.task('test', ['build-src', 'build-test', 'build-json'], (cb) => {
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     singleRun: true
@@ -47,7 +53,7 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('**/*.html', browser.reload);
 });
 
-gulp.task('build', ['build-src', 'build-test']);
+gulp.task('build', ['build-json', 'build-src', 'build-test']);
 
 gulp.task('default', ['build', 'test', 'browserSync']);
 

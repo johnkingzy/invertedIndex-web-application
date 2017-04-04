@@ -6,6 +6,7 @@ node_js:
 
 before_script:
   - npm install -g gulp
+  - gulp
 
 before_install:
  - export CHROME_BIN=/usr/bin/google-chrome

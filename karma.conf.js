@@ -21,8 +21,9 @@ module.exports = (config) => {
 
     // list of files / patterns to load in the browser
     files: [
+      'build/tests/*.json',
       'build/js/invertedIndex.js',
-      'build/tests/*.js',
+      'build/tests/*.js'
     ],
 
     browserify: {
@@ -39,6 +40,7 @@ module.exports = (config) => {
     // available preprocessors
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/tests/*.json': ['browserify'],
       'build/tests/*.js': ['browserify', 'coverage'],
       'build/js/invertedIndex.js': ['coverage']
     },
