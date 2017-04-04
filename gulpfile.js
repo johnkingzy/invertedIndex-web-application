@@ -1,16 +1,15 @@
 const gulp = require('gulp'); // using the gulp module
 const babel = require('gulp-babel'); // using gulp babel
-const browser = require('browser-sync'); // browser sync instance.
-
+const browser = require('browser-sync'); // browser sync instance
 
 const Server = require('karma').Server;
 
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
-  specSrc: 'src/tests/*.js',
+  specSrc: 'src/tests/',
   specDest: 'build/tests',
-  spec: 'build/tests/*.js'
+  spec: 'build/tests/'
 };
 
 gulp.task('browserSync', () => {
@@ -20,6 +19,7 @@ gulp.task('browserSync', () => {
     }
   });
 });
+
 
 const build = (src, dst) =>
   gulp.src(src)
