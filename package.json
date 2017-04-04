@@ -11,11 +11,15 @@
     "browserify": "^14.1.0",
     "eslint": "^3.18.0",
     "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.1",
+    "gulp-util": "^3.0.8",
+    "gulp-watchify": "^0.6.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1"
+    "karma-coverage": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-amd": "^6.24.0",
@@ -33,7 +37,7 @@
     "requirejs": "^2.1.11"
   },
   "scripts": {
-    "test": "gulp build && gulp test",
+    "test": "gulp test",
     "eslint": "eslint *"
   },
   "author": "maximuf",

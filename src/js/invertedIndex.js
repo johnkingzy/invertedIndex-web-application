@@ -28,9 +28,9 @@ class InvertedIndex {
     const numOfBooks = fileContent.length;
     for (let bookIndex = 0; bookIndex <
       numOfBooks; bookIndex += 1) {
-      const { title, text } = fileContent[bookIndex];
-      const tokens = InvertedIndex.tokenize(`${title} ${text}`);
-      const indicies = this.indicies[fileName];
+      const { title, text } = fileContent[bookIndex],
+        tokens = InvertedIndex.tokenize(`${title} ${text}`),
+        indicies = this.indicies[fileName];
       tokens.forEach((token) => {
         if (token in indicies) {
           const eachToken = indicies[token];
@@ -58,15 +58,15 @@ class InvertedIndex {
     return this.indicies[fileName];
   }
 
-   /**
-   * @getNumofBooks method
-   * @param {fileName} fileName
-   * @returns {Array}
-   * create index of the fileName
-   */
+  /**
+  * @getNumofBooks method
+  * @param {fileName} fileName
+  * @returns {Array}
+  * create index of the fileName
+  */
   getNumOfBooks(fileName) {
-    const numOfBooks = this.indexedFiles[fileName];
-    const indexArr = [];
+    const numOfBooks = this.indexedFiles[fileName],
+      indexArr = [];
     for (let i = 0; i < numOfBooks; i += 1) {
       indexArr.push(i);
     }
@@ -83,9 +83,9 @@ class InvertedIndex {
   static tokenize(str) {
     let value = str;
     value = value.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '')
-    .trim()
-    .toLowerCase()
-    .split(/\s+/);
+      .trim()
+      .toLowerCase()
+      .split(/\s+/);
     return value;
   }
 
@@ -158,24 +158,27 @@ class InvertedIndex {
    * reads the content of the book
    */
   searchIndex(keyword, locations) {
-    const books = Object.keys(this.indicies);
-    if (!keyword) {
-      const error = 'please enter a keyword to search.';
-      throw new Error(error);
-    }
+    try {
+      const books = Object.keys(this.indicies);
+      if (!keyword) {
+        const error = 'please enter a keyword to search.';
+        throw new Error(error);
+      }
 
-    this.finalResult = {};
-    if (!locations || books.length === 0) {
-      const error = 'No file has been indexed yet';
-      throw new Error(error);
-    } else {
-      locations = locations || Object.keys(this.indicies);
+      this.finalResult = {};
+      if (!locations || books.length === 0) {
+        const error = 'No file has been indexed yet';
+        throw new Error(error);
+      } else {
+        locations = locations || Object.keys(this.indicies);
+      }
+      locations.forEach((fileName) => {
+        const result = this.getResult(keyword, fileName);
+        this.finalResult[fileName] = result;
+      });
+    } catch (e) {
+      throw new Error(e);
     }
-    locations.forEach((fileName) => {
-      const result = this.getResult(keyword, fileName);
-      this.finalResult[fileName] = result;
-    });
-    return true;
   }
 
   /**
@@ -186,10 +189,14 @@ class InvertedIndex {
    * get the result of the keyword from the indicies
    */
   getResult(keyword, fileName) {
-    const searchResult = {};
-    const keywords = InvertedIndex.cleanValues(keyword);
-    const fileIndex = this.indicies[fileName];
-    const currentToken = Object.keys(this.indicies[fileName]);
+    const searchResult = {},
+      keywords = InvertedIndex.cleanValues(keyword),
+      fileIndex = this.indicies[fileName],
+      currentToken = Object.keys(this.indicies[fileName]);
+    if (keywords.length === 0) {
+      const error = 'Search for Aplhanumeric values only';
+      throw new Error(error);
+    }
     keywords.forEach((elem) => {
       if (currentToken.includes(elem)) {
         searchResult[elem] = fileIndex[elem];
@@ -207,9 +214,12 @@ class InvertedIndex {
    * cleans the keyword for search
    */
   static cleanValues(str) {
-    const value = str.replace(/[&\\#,+()$~%.'":*?<>{}]/g, ' ')
-    .toLowerCase()
-    .split(/\b\s+(?!$)/);
+    let value = str.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '')
+      .replace(/[[|\]]/g, '')
+      .toLowerCase()
+      .trim()
+      .split(/\b\s+(?!$)/);
+    value = value.filter(elem => elem !== '');
     return value;
   }
 }

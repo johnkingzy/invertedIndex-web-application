@@ -64,7 +64,7 @@ describe('Populating Data', () => {
     const search = () => {
       myClass.searchIndex();
     };
-    expect(search).toThrowError('please enter a keyword to search.');
+    expect(search).toThrowError('Error: please enter a keyword to search.');
   });
 
   it('Should return true for well formatted File', () => {

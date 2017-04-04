@@ -1,7 +1,6 @@
-const gulp = require('gulp'); // using the gulp module
-const babel = require('gulp-babel'); // using gulp babel
-const browser = require('browser-sync'); // browser sync instance
-
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const browser = require('browser-sync');
 const Server = require('karma').Server;
 
 const paths = {
@@ -28,15 +27,15 @@ const build = (src, dst) =>
       presets: ['es2015']
     }))
     .pipe(gulp.dest(dst));
+const bundle = (src, dst) =>
+  gulp.src(src)
+  .pipe(gulp.dest(dst));
 
 gulp.task('build-src', () => build(paths.src, paths.dest));
 
 gulp.task('build-test', () => build(paths.specSrc, paths.specDest));
 
-gulp.task('build-json', () => {
-  gulp.src(paths.jsonSrc)
-    .pipe(gulp.dest(paths.jsonDest));
-});
+gulp.task('build-json', () => bundle(paths.jsonSrc, paths.jsonDest));
 
 // Run the unit tests without any coverage calculations
 gulp.task('test', ['build-src', 'build-test', 'build-json'], (cb) => {
@@ -50,10 +49,10 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('src/js/**/*.js', browser.reload);
   gulp.watch('lib/js/**/*.js', browser.reload);
   gulp.watch('lib/css/**/*.css', browser.reload);
-  gulp.watch('**/*.html', browser.reload);
+  gulp.watch('*.html', browser.reload);
 });
 
 gulp.task('build', ['build-json', 'build-src', 'build-test']);
 
-gulp.task('default', ['build', 'test', 'browserSync']);
+gulp.task('default', ['build', 'test', 'watch']);
 
