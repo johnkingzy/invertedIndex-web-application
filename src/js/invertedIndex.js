@@ -134,7 +134,7 @@ class InvertedIndex {
     try {
       content = JSON.parse(fileContent);
     } catch (e) {
-      const error = `OOPS!!! ${fileName} is not well formatted`;
+      const error = `${fileName} is not well formatted`;
       throw new Error(error);
     }
     if (content.length === 0) {
@@ -162,7 +162,7 @@ class InvertedIndex {
       const books = Object.keys(this.indicies);
       if (!keyword) {
         const error = 'please enter a keyword to search.';
-        throw new Error(error);
+        throw (error);
       }
 
       this.finalResult = {};
@@ -195,7 +195,7 @@ class InvertedIndex {
       currentToken = Object.keys(this.indicies[fileName]);
     if (keywords.length === 0) {
       const error = 'Search for Aplhanumeric values only';
-      throw new Error(error);
+      throw (error);
     }
     keywords.forEach((elem) => {
       if (currentToken.includes(elem)) {
