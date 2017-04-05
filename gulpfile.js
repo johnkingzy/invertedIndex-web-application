@@ -1,6 +1,9 @@
 const gulp = require('gulp');
+
 const babel = require('gulp-babel');
+
 const browser = require('browser-sync');
+
 const Server = require('karma').Server;
 
 const paths = {
@@ -27,6 +30,7 @@ const build = (src, dst) =>
       presets: ['es2015']
     }))
     .pipe(gulp.dest(dst));
+
 const bundle = (src, dst) =>
   gulp.src(src)
   .pipe(gulp.dest(dst));

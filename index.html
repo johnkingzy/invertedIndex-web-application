@@ -15,7 +15,31 @@
     <link href="lib/css/custom.css" rel='stylesheet' type='text/css' />
 
 </head>
+
 <body ng-controller="IndexCtrl">
+    <!-- Modal for displaying the messages -->
+    <div class="modal fade" id="messageModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h5 class="modal-title">Errors</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- The messages container -->
+                    {{displayMsg}}
+                    <div id="errors"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="image-container set-full-height" style="background-image: url('lib/images/banner.jpg')">
         <div class="content white">
             <nav class="navbar navbar-default" role="navigation">
@@ -90,7 +114,7 @@
                                 </ul>
                             </div>
                         </form>
-                        <div class="alert alert-{{msgType}}" ng-show="showError">
+                        <div class="alert alert-{{msgType}}">
                             <button type="button" class="close" data-ng-click="switchBool('showError')">×</button>
                             <strong>{{note}}</strong> {{displayMsg}}
                         </div>
@@ -188,6 +212,9 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+       <center><p style="font-size: 1.2em; color: #0f0f0f">≈Måximuƒ≈</p></center>
         </div>
     </div>
 </body>

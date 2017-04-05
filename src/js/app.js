@@ -6,22 +6,20 @@
 (() => {
   /** @function mainCtrl
    * @param {$scope} $scope
-   * @param {$timeout} $timeout
    * @return {null} null
   */
-  function mainCtrl($scope, $timeout) {
+  function mainCtrl($scope) {
     const invertedIndex = new InvertedIndex();
     $scope.uploadedFiles = {};
     $scope.indexed = {};
     $scope.welcome = true;
     $scope.selection = {};
     $scope.msgDisplay = (type, msg) => {
-      $scope.msgType = type;
-      $scope.displayMsg = msg;
-      $scope.showError = true;
-      $timeout(() => {
-        $scope.showError = false;
-      }, 3000);
+      $.toaster({
+        priority: 'danger',
+        title: '',
+        message: msg
+      });
     };
 
     $scope.createIndex = (selectedFile) => {
@@ -68,7 +66,7 @@
       }
       const keywords = $scope.keyword,
         ms = Object.keys($scope.selection)
-        .filter(key => $scope.selection[key] === true);
+          .filter(key => $scope.selection[key] === true);
       let totalBooks;
       if (ms.length < 1) {
         totalBooks = Object.keys($scope.indexed);
@@ -161,5 +159,5 @@
     ['angularUtils.directives.dirPagination']);
   app.controller('IndexCtrl', mainCtrl);
   app.filter('rowFunc', table);
-  mainCtrl.$inject = ['$scope', '$timeout'];
+  mainCtrl.$inject = ['$scope'];
 })();

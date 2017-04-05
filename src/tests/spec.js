@@ -60,11 +60,16 @@ describe('Populating Data', () => {
     expect(search).toThrowError();
   });
 
+  it('Should return an empty if not found', () => {
+    myClass.searchIndex('alive', ['books.json']);
+    expect(myClass.finalResult).toEqual({ 'books.json': Object({ alive: [] }) });
+  });
+
   it('Should return `please enter a keyword to search.`', () => {
     const search = () => {
       myClass.searchIndex();
     };
-    expect(search).toThrowError('Error: please enter a keyword to search.');
+    expect(search).toThrowError('please enter a keyword to search.');
   });
 
   it('Should return true for well formatted File', () => {
@@ -73,9 +78,9 @@ describe('Populating Data', () => {
   });
 
   it('Should throw an error for empty books', () => {
-    const name = 'emptybook.json';
+    const fileName = 'emptybook.json';
     const checkEmptyBook = () => {
-      InvertedIndex.validateFile(emptyBook, name);
+      InvertedIndex.validateFile(emptyBook, fileName);
     };
     expect(checkEmptyBook).toThrowError();
   });
@@ -85,7 +90,7 @@ describe('Populating Data', () => {
     const invalidKey = () => {
       InvertedIndex.validateFile(invalidKeys, name);
     };
-    expect(invalidKey).toThrowError(`OOPS!!! ${name} is not well formatted`);
+    expect(invalidKey).toThrowError(`${name} is not well formatted`);
   });
 
   it('Should return an object for getIndex method', () => {
@@ -121,5 +126,17 @@ describe('Populating Data', () => {
   it('Should return an array of clean values', () => {
     expect(InvertedIndex.cleanValues('How, are, you doing today'))
     .toEqual(['how', 'are', 'you', 'doing', 'today']);
+  });
+
+  it('Should return', () => {
+    expect(myClass.getResult('alice', ['books.json']))
+    .toEqual({ alice: [0, 3] });
+  });
+
+  it('Should return', () => {
+    const validInput = () => {
+      myClass.getResult('[[[[[[[[[[[]]]]]]]]]', ['books.json']);
+    };
+    expect(validInput).toThrow('Search for Aplhanumeric values only');
   });
 });
