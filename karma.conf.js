@@ -21,8 +21,9 @@ module.exports = (config) => {
 
     // list of files / patterns to load in the browser
     files: [
-      'build/js/invertindex.js',
-      'build/tests/*.js',
+      'build/tests/*.json',
+      'build/js/invertedIndex.js',
+      'build/tests/*.js'
     ],
 
     browserify: {
@@ -39,8 +40,9 @@ module.exports = (config) => {
     // available preprocessors
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/tests/*.json': ['browserify'],
       'build/tests/*.js': ['browserify', 'coverage'],
-      'build/js/invertindex.js': ['coverage']
+      'build/js/invertedIndex.js': ['coverage']
     },
     coverageReporter: {
       type: 'lcov',
@@ -76,10 +78,9 @@ module.exports = (config) => {
     // https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous

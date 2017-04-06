@@ -1,16 +1,18 @@
-const gulp = require('gulp'); // using the gulp module
-const babel = require('gulp-babel'); // using gulp babel
-const browser = require('browser-sync'); // browser sync instance.
+const gulp = require('gulp');
 
+const babel = require('gulp-babel');
+
+const browser = require('browser-sync');
 
 const Server = require('karma').Server;
 
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
-  specSrc: 'src/tests/*Spec.js',
-  specDest: 'build/tests',
-  spec: 'build/tests/*Spec.js'
+  specSrc: 'src/**/*spec.js',
+  specDest: 'build/',
+  jsonSrc: 'src/**/*.json',
+  jsonDest: 'build/'
 };
 
 gulp.task('browserSync', () => {
@@ -20,6 +22,8 @@ gulp.task('browserSync', () => {
     }
   });
 });
+
+
 const build = (src, dst) =>
   gulp.src(src)
     .pipe(babel({
@@ -27,12 +31,18 @@ const build = (src, dst) =>
     }))
     .pipe(gulp.dest(dst));
 
+const bundle = (src, dst) =>
+  gulp.src(src)
+  .pipe(gulp.dest(dst));
+
 gulp.task('build-src', () => build(paths.src, paths.dest));
 
 gulp.task('build-test', () => build(paths.specSrc, paths.specDest));
 
+gulp.task('build-json', () => bundle(paths.jsonSrc, paths.jsonDest));
+
 // Run the unit tests without any coverage calculations
-gulp.task('test', ['build-src', 'build-test'], (cb) => {
+gulp.task('test', ['build-src', 'build-test', 'build-json'], (cb) => {
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     singleRun: true
@@ -46,7 +56,7 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('*.html', browser.reload);
 });
 
-gulp.task('build', ['build-src', 'build-test']);
+gulp.task('build', ['build-json', 'build-src', 'build-test']);
 
-gulp.task('default', ['build', 'test', 'browserSync']);
+gulp.task('default', ['build', 'test', 'watch']);
 
