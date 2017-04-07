@@ -46,3 +46,4 @@ lib/
 src/css/
 node_modules/
 build/
+dist/

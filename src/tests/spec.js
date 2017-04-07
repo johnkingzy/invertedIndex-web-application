@@ -1,15 +1,15 @@
 /* My Test Setups */
 /* global describe it expect */
 /* global FileReader */
-/* global InvertedIndex */
 /* global File */
-import myBook from './books.json';
+/* global InvertedIndex */
+import myBook from './myBook.json';
 import emptyBook from './emptyBook.json';
-import invalidKeys from './Invalidkeys.json';
+import invalidKeys from './invalidBook.json';
 
 /* My Suites */
 describe('Class and Method Instantaion', () => {
-  const myClass = new InvertedIndex();
+  const invertedIndex = new InvertedIndex();
 
   it('Should be instantiated with the new keyword', () => {
     const init = () => {
@@ -19,15 +19,15 @@ describe('Class and Method Instantaion', () => {
   });
 
   it('Should contain the getIndex method', () => {
-    expect(typeof myClass.getIndex).toBe('function');
+    expect(typeof invertedIndex.getIndex).toBe('function');
   });
 
   it('Should contain the createIndex method', () => {
-    expect(typeof myClass.createIndex).toBe('function');
+    expect(typeof invertedIndex.createIndex).toBe('function');
   });
 
   it('Should contain the searchIndex method', () => {
-    expect(typeof myClass.searchIndex).toBe('function');
+    expect(typeof invertedIndex.searchIndex).toBe('function');
   });
 
   it('Should contain the readFile method', () => {
@@ -43,31 +43,31 @@ describe('Class and Method Instantaion', () => {
   });
 });
 
-describe('Populating Data', () => {
-  const myClass = new InvertedIndex();
-  myClass.createIndex('books.json', myBook);
-  const getIndex = myClass.getIndex('books.json');
+describe('Confirm Methods Outputs and Edge Cases', () => {
+  const invertedIndex = new InvertedIndex();
+  invertedIndex.createIndex('books.json', myBook);
+  const getIndex = invertedIndex.getIndex('books.json');
   const jsonFile = new File([JSON.stringify(myBook)],
     'books.json', { type: 'application/json' });
   it('Should return true for creating Index', () => {
-    expect(myClass.createIndex('books.json', myBook)).toBeTruthy();
+    expect(invertedIndex.createIndex('books.json', myBook)).toBeTruthy();
   });
 
   it('Should return `No file has been indexed yet', () => {
     const search = () => {
-      myClass.searchIndex('alice');
+      invertedIndex.searchIndex('alice');
     };
     expect(search).toThrowError();
   });
 
   it('Should return an empty if not found', () => {
-    myClass.searchIndex('alive', ['books.json']);
-    expect(myClass.finalResult).toEqual({ 'books.json': Object({ alive: [] }) });
+    invertedIndex.searchIndex('alive', ['books.json']);
+    expect(invertedIndex.finalResult).toEqual({ 'books.json': Object({ alive: [] }) });
   });
 
   it('Should return `please enter a keyword to search.`', () => {
     const search = () => {
-      myClass.searchIndex();
+      invertedIndex.searchIndex();
     };
     expect(search).toThrowError('please enter a keyword to search.');
   });
@@ -86,7 +86,7 @@ describe('Populating Data', () => {
   });
 
   it('Should throw an error for Invalid keys', () => {
-    const name = 'invalidKeys.json';
+    const name = 'invalidBook.json';
     const invalidKey = () => {
       InvertedIndex.validateFile(invalidKeys, name);
     };
@@ -103,7 +103,7 @@ describe('Populating Data', () => {
   });
 
   it('Should return the numbers of books in a file', () => {
-    const numOfBooks = myClass.getNumOfBooks('books.json');
+    const numOfBooks = invertedIndex.booksIndex('books.json');
     expect(numOfBooks.length).toEqual(6);
   });
 
@@ -129,13 +129,13 @@ describe('Populating Data', () => {
   });
 
   it('Should return', () => {
-    expect(myClass.getResult('alice', ['books.json']))
+    expect(invertedIndex.getResult('alice', ['books.json']))
     .toEqual({ alice: [0, 3] });
   });
 
   it('Should return', () => {
     const validInput = () => {
-      myClass.getResult('[[[[[[[[[[[]]]]]]]]]', ['books.json']);
+      invertedIndex.getResult('[[[[[[[[[[[]]]]]]]]]', ['books.json']);
     };
     expect(validInput).toThrow('Search for Aplhanumeric values only');
   });

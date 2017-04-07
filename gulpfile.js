@@ -1,4 +1,3 @@
-/* eslint-disable */
 const gulp = require('gulp');
 
 const babel = require('gulp-babel');
@@ -6,7 +5,7 @@ const babel = require('gulp-babel');
 const browser = require('browser-sync');
 
 const Server = require('karma').Server;
-/* eslint-enable */
+
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
@@ -43,7 +42,7 @@ gulp.task('build-test', () => build(paths.specSrc, paths.specDest));
 gulp.task('build-json', () => bundle(paths.jsonSrc, paths.jsonDest));
 
 // Run the unit tests without any coverage calculations
-gulp.task('test', ['build-src', 'build-test', 'build-json'], (cb) => {
+gulp.task('test', ['build-json', 'build-src', 'build-test'], (cb) => {
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     singleRun: true

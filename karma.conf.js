@@ -40,7 +40,6 @@ module.exports = (config) => {
     // available preprocessors
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/tests/*.json': ['browserify'],
       'build/tests/*.js': ['browserify', 'coverage'],
       'build/js/invertedIndex.js': ['coverage']
     },
@@ -80,7 +79,7 @@ module.exports = (config) => {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

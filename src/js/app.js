@@ -1,8 +1,9 @@
 /* global angular */
-/* global InvertedIndex */
 /* global document */
 /* global window */
 /* global $ */
+/* global InvertedIndex */
+
 (() => {
   /** @function mainCtrl
    * @param {$scope} $scope
@@ -31,7 +32,7 @@
       if (invertedIndex.createIndex(selectedFile, fileContent)) {
         const indices = invertedIndex.getIndex(selectedFile),
           tokens = Object.keys(indices),
-          bookIndices = invertedIndex.getNumOfBooks(selectedFile);
+          bookIndices = invertedIndex.booksIndex(selectedFile);
         $scope.indexed[selectedFile] = {
           selectedFile,
           indices,
@@ -79,11 +80,11 @@
           keys = Object.keys(finalResult);
         keys.forEach((key) => {
           const file = finalResult[key];
-          const numOfBook = invertedIndex.getNumOfBooks(key);
+          const totalBook = invertedIndex.booksIndex(key);
           $scope.searchResult[key] = {
             name: key,
             result: file,
-            countBook: numOfBook
+            countBook: totalBook
           };
           if (Object.keys($scope.searchResult).length !== 0) {
             $scope.showSearch = true;

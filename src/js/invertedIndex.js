@@ -1,73 +1,69 @@
 /* global FileReader */
-/* global InvertedIndex */
 /**
  * @class InvertedIndex
- * @classdesc blah blah
+ * @classdesc containing the InvertedIndex methods
  */
-/* eslint-disable */
 class InvertedIndex {
-  /* eslint-enable */
   /**
    * * @constructor
    * initialises the class base properties
    */
   constructor() {
-    this.indicies = {};
+    this.indices = {};
     this.indexedFiles = {};
     this.uploadedFiles = {};
   }
   /**
    * @createIndex method
-   * @param {fileName} fileName
-   * @param {fileContent} fileContent
-   * @returns {boolean}
+   * @param {string} fileName
+   * @param {Object} fileContent
+   * @returns {boolean} true - index created successfully
    * create index of the fileName
    */
   createIndex(fileName, fileContent) {
-    this.indicies[fileName] = this.indicies[fileName] || {};
-    const numOfBooks = fileContent.length;
+    this.indices[fileName] = this.indices[fileName] || {};
+    const totalBooks = fileContent.length;
     for (let bookIndex = 0; bookIndex <
-      numOfBooks; bookIndex += 1) {
+      totalBooks; bookIndex += 1) {
       const { title, text } = fileContent[bookIndex],
         tokens = InvertedIndex.tokenize(`${title} ${text}`),
-        indicies = this.indicies[fileName];
+        indices = this.indices[fileName];
       tokens.forEach((token) => {
-        if (token in indicies) {
-          const eachToken = indicies[token];
+        if (token in indices) {
+          const eachToken = indices[token];
           if (eachToken.indexOf(bookIndex) === -1) {
-            indicies[token].push(bookIndex);
+            indices[token].push(bookIndex);
           }
         } else {
-          // Initially this is what happens
-          indicies[token] = [bookIndex];
+          indices[token] = [bookIndex];
         }
       });
     }
 
-    this.indexedFiles[fileName] = numOfBooks;
+    this.indexedFiles[fileName] = totalBooks;
     return true;
   }
 
   /**
    * @getIndex method
-   * @param {fileName} fileName
-   * @returns {Object}
+   * @param {string} fileName - The File Name
+   * @returns {Object} The index of the fileName
    * gets the index of the fileName
    */
   getIndex(fileName) {
-    return this.indicies[fileName];
+    return this.indices[fileName];
   }
 
   /**
-  * @getNumofBooks method
-  * @param {fileName} fileName
-  * @returns {Array}
-  * create index of the fileName
+  * @booksIndex method
+  * @param {string} fileName - The File Name
+  * @returns {Array} All books Index
+  * get all books index
   */
-  getNumOfBooks(fileName) {
-    const numOfBooks = this.indexedFiles[fileName],
+  booksIndex(fileName) {
+    const totalBooks = this.indexedFiles[fileName],
       indexArr = [];
-    for (let i = 0; i < numOfBooks; i += 1) {
+    for (let i = 0; i < totalBooks; i += 1) {
       indexArr.push(i);
     }
     return indexArr;
@@ -76,12 +72,12 @@ class InvertedIndex {
 
   /**
    * @tokenize method
-   * @param {str} str
-   * @returns {Array}
-   * create index of the fileName
+   * @param {string} words - The words
+   * @returns {Array} The tokenize strings
+   * strips out special characters
    */
-  static tokenize(str) {
-    let value = str;
+  static tokenize(words) {
+    let value = words;
     value = value.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '')
       .trim()
       .toLowerCase()
@@ -91,9 +87,9 @@ class InvertedIndex {
 
   /**
    * @readFile method
-   * @param {currentFile} currentFile
-   * @returns {Array}
-   * reads the content of the book
+   * @param {string} currentFile - The File Name
+   * @returns {Array} contains File Name and Content
+   * reads the content of the file
    */
   static readFile(currentFile) {
     return new Promise((resolve, reject) => {
@@ -119,10 +115,10 @@ class InvertedIndex {
   }
   /**
    * @validateFile method
-   * @param {fileContent} fileContent
-   * @param {fileName} fileName
-   * @returns {Boolean}
-   * reads the content of the book
+   * @param {string} fileContent - Content of File
+   * @param {string} fileName - Name of the File
+   * @returns {Boolean} true - validation successful
+   * validates File Name and Content
    */
   static validateFile(fileContent, fileName) {
     const fileExt = fileName.split('.').pop();
@@ -152,14 +148,14 @@ class InvertedIndex {
 
   /**
    * @searchIndex method
-   * @param {keyword} keyword
-   * @param {locations} locations
-   * @returns {Boolean}
-   * reads the content of the book
+   * @param {string} keyword - The token to be searched for
+   * @param {Array} locations - Where to search for it
+   * @returns {Boolean} true - searched successfully
+   * Search for token in books
    */
   searchIndex(keyword, locations) {
     try {
-      const books = Object.keys(this.indicies);
+      const books = Object.keys(this.indices);
       if (!keyword) {
         const error = 'please enter a keyword to search.';
         throw (error);
@@ -170,7 +166,7 @@ class InvertedIndex {
         const error = 'No file has been indexed yet';
         throw new Error(error);
       } else {
-        locations = locations || Object.keys(this.indicies);
+        locations = locations || Object.keys(this.indices);
       }
       locations.forEach((fileName) => {
         const result = this.getResult(keyword, fileName);
@@ -183,16 +179,16 @@ class InvertedIndex {
 
   /**
    * @getResult method
-   * @param {keyword} keyword
-   * @param {fileName} fileName
-   * @returns {Array}
-   * get the result of the keyword from the indicies
+   * @param {string} keyword
+   * @param {string} fileName
+   * @returns {Array} contains search result
+   * get the result of the keyword from the indices
    */
   getResult(keyword, fileName) {
     const searchResult = {},
       keywords = InvertedIndex.cleanValues(keyword),
-      fileIndex = this.indicies[fileName],
-      currentToken = Object.keys(this.indicies[fileName]);
+      fileIndex = this.indices[fileName],
+      currentToken = Object.keys(this.indices[fileName]);
     if (keywords.length === 0) {
       const error = 'Search for Aplhanumeric values only';
       throw (error);
@@ -209,12 +205,12 @@ class InvertedIndex {
 
   /**
    * @cleanValues method
-   * @param {str} str
-   * @returns {Array}
+   * @param {string} word - word to clean
+   * @returns {Array} contains cleaned words
    * cleans the keyword for search
    */
-  static cleanValues(str) {
-    let value = str.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '')
+  static cleanValues(word) {
+    let value = word.replace(/[&\\#,+()$~%.'":*?<>{}]/g, '')
       .replace(/[[|\]]/g, '')
       .toLowerCase()
       .trim()
