@@ -219,3 +219,4 @@ class InvertedIndex {
     return value;
   }
 }
+const invertedIndex = new InvertedIndex();

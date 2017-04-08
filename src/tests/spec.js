@@ -7,10 +7,14 @@ import myBook from './myBook.json';
 import emptyBook from './emptyBook.json';
 import invalidKeys from './invalidBook.json';
 
+const invertedIndex = new InvertedIndex();
+invertedIndex.createIndex('books.json', myBook);
+const getIndex = invertedIndex.getIndex('books.json');
+const jsonFile = new File([JSON.stringify(myBook)],
+    'books.json', { type: 'application/json' });
+
 /* My Suites */
 describe('Class and Method Instantaion', () => {
-  const invertedIndex = new InvertedIndex();
-
   it('Should be instantiated with the new keyword', () => {
     const init = () => {
       InvertedIndex();
@@ -44,11 +48,7 @@ describe('Class and Method Instantaion', () => {
 });
 
 describe('Confirm Methods Outputs and Edge Cases', () => {
-  const invertedIndex = new InvertedIndex();
-  invertedIndex.createIndex('books.json', myBook);
-  const getIndex = invertedIndex.getIndex('books.json');
-  const jsonFile = new File([JSON.stringify(myBook)],
-    'books.json', { type: 'application/json' });
+
   it('Should return true for creating Index', () => {
     expect(invertedIndex.createIndex('books.json', myBook)).toBeTruthy();
   });
