@@ -16,3 +16,6 @@ build/js
 build/tests
 build/
 gulpfile.js
+main.js
+Procfile
+app.js

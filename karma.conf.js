@@ -16,7 +16,8 @@ module.exports = (config) => {
       'karma-jasmine',
       'karma-chrome-launcher',
       'karma-coverage',
-      'karma-browserify'
+      'karma-browserify',
+      'karma-babel-preprocessor'
     ],
 
     // list of files / patterns to load in the browser
