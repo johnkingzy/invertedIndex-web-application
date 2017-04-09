@@ -1,1 +1,1 @@
-repo_token: gXgeoORGKcIyxW5hqLaD17QIkjTdjozWH
+repo_token: process.env.repo_token

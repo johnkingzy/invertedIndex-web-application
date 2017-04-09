@@ -219,4 +219,6 @@ class InvertedIndex {
     return value;
   }
 }
+/* eslint-disable no-unused-vars */
 const invertedIndex = new InvertedIndex();
+

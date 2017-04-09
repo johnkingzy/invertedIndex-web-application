@@ -26,7 +26,6 @@
     $scope.createIndex = (selectedFile) => {
       if (selectedFile === null || typeof selectedFile === 'undefined') {
         $scope.msgDisplay('danger', 'Select a File to Create Index');
-        // $("#myModal").modal('show');
       }
       const fileContent = $scope.uploadedFiles[selectedFile];
       if (invertedIndex.createIndex(selectedFile, fileContent)) {
@@ -133,7 +132,6 @@
       });
     }
     // We can attach the `fileselect` event to all file inputs on the page
-    // const fileUpload = document.getElementById('upload');
     /** @function init
    * @return {null} null
   */
@@ -145,8 +143,8 @@
       Init();
     }
   }
-  /** @function init
-   * @return {null} null
+  /** @function table
+   * @return {String} string
   */
   const table = () => (input, arr) => {
     if (arr.includes(input)) {
@@ -154,7 +152,6 @@
     }
     return 'cross';
   };
-  // };
 
   const app = angular.module('invertedIndex',
     ['angularUtils.directives.dirPagination']);

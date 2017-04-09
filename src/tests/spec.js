@@ -48,7 +48,6 @@ describe('Class and Method Instantaion', () => {
 });
 
 describe('Confirm Methods Outputs and Edge Cases', () => {
-
   it('Should return true for creating Index', () => {
     expect(invertedIndex.createIndex('books.json', myBook)).toBeTruthy();
   });
@@ -62,7 +61,9 @@ describe('Confirm Methods Outputs and Edge Cases', () => {
 
   it('Should return an empty if not found', () => {
     invertedIndex.searchIndex('alive', ['books.json']);
-    expect(invertedIndex.finalResult).toEqual({ 'books.json': Object({ alive: [] }) });
+    expect(invertedIndex.finalResult).toEqual(
+      { 'books.json': Object({ alive: [] }) }
+      );
   });
 
   it('Should return `please enter a keyword to search.`', () => {
