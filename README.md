@@ -1,11 +1,6 @@
 # InvertedIndex
 ## Inverted Index
-
-[![Coverage Status](https://coveralls.io/repos/github/andela-ksolomon/invertedIndex/badge.svg?branch=developing)](https://coveralls.io/github/andela-ksolomon/invertedIndex?branch=developing)
-
-[![Code Climate](https://codeclimate.com/github/andela-ksolomon/invertedIndex/badges/gpa.svg)](https://codeclimate.com/github/andela-ksolomon/invertedIndex)
-
-[![Build Status](https://travis-ci.org/andela-ksolomon/invertedIndex.svg?branch=developing)](https://travis-ci.org/andela-ksolomon/invertedIndex)
+[![Coverage Status](https://coveralls.io/repos/github/andela-ksolomon/invertedIndex/badge.svg?branch=developing)](https://coveralls.io/github/andela-ksolomon/invertedIndex?branch=developing)[![Code Climate](https://codeclimate.com/github/andela-ksolomon/invertedIndex/badges/gpa.svg)](https://codeclimate.com/github/andela-ksolomon/invertedIndex)[![Build Status](https://travis-ci.org/andela-ksolomon/invertedIndex.svg?branch=developing)](https://travis-ci.org/andela-ksolomon/invertedIndex)
 
 ### Overview
 Inverted Index is an online software that solves the problem of searching through little parts of a large documents using the 
