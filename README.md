@@ -56,23 +56,19 @@ InvertedIndex only supports JSON files only, see example below.
 ```
 **Upload a JSON File
 - Click on the Upload Button and Select either Multiple Files or Single File
-![alt text][logo]
-[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/upload-button.png "Inverted Index By Solomon Kingsley"
+![Upload Button](https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/upload-button.png)
 
 **Create Index
 - Once File is Uploaded, Select File to Create Index
-![alt text][logo]
-[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/select-file.png "Inverted Index By Solomon Kingsley"
+![Create Index](https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/select-file.png)
 
 **View Index
 - Create Indices are stored, use the view dropdown to select file to view
-![alt text][logo]
-[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/view-index.png "Inverted Index By Solomon Kingsley"
+![View Index](https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/view-index.png)
 
 **Search For Keyword
 - Type Keywords seperated with comma or space and Select Files to Search From
-![alt text][logo]
-[logo]: https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/search-keyword.png "Inverted Index By Solomon Kingsley"
+![Search keyword](https://raw.githubusercontent.com/andela-ksolomon/invertedIndex/developing/lib/images/search-keyword.png)
 
 ## To Run Locally (For Developers Only)
 - Clone this Repository `https://github.com/andela-ksolomon/invertedIndex.git`
