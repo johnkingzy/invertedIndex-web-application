@@ -42,7 +42,9 @@ node_modules/
 !.vscode/extensions.json
 
 .DS_Store
-lib/
+lib/css
+lib/js
+lib/fonts
 src/css/
 node_modules/
 build/

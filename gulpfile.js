@@ -9,7 +9,7 @@ const Server = require('karma').Server;
 const paths = {
   src: 'src/**/*.js',
   dest: 'build/',
-  specSrc: 'src/**/*spec.js',
+  specSrc: 'src/**/*.spec.js',
   specDest: 'build/',
   jsonSrc: 'src/**/*.json',
   jsonDest: 'build/'

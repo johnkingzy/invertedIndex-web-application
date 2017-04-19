@@ -9,7 +9,7 @@
    * @param {$scope} $scope
    * @return {null} null
   */
-  function mainCtrl($scope) {
+  mainCtrl = ($scope) => {
     const invertedIndex = new InvertedIndex();
     $scope.uploadedFiles = {};
     $scope.indexed = {};
@@ -65,13 +65,13 @@
         return false;
       }
       const keywords = $scope.keyword,
-        ms = Object.keys($scope.selection)
+        location = Object.keys($scope.selection)
           .filter(key => $scope.selection[key] === true);
       let totalBooks;
-      if (ms.length < 1) {
+      if (location.length < 1) {
         totalBooks = Object.keys($scope.indexed);
       } else {
-        totalBooks = ms;
+        totalBooks = location;
       }
       try {
         invertedIndex.searchIndex(keywords, totalBooks);
@@ -91,8 +91,8 @@
             $scope.welcome = false;
           }
         });
-      } catch (err) {
-        $scope.msgDisplay('danger', err);
+      } catch (error) {
+        $scope.msgDisplay('danger', error);
       }
     };
 
@@ -103,10 +103,10 @@
     };
 
     /** @function init
-     * @param {uploadedFile} uploadedFile
+     * @param {object} uploadedFile
    * @return {null} null
   */
-    function uploadFile(uploadedFile) {
+    uploadFile = (uploadedFile) => {
       const files = uploadedFile.target.files;
       $scope.replaceFiles = [];
       const keys = Object.keys(files);
@@ -131,11 +131,11 @@
           });
       });
     }
-    // We can attach the `fileselect` event to all file inputs on the page
-    /** @function init
+
+    /** @function Init
    * @return {null} null
   */
-    function Init() {
+    Init = () => {
       const fileselect = document.getElementById('fileselect');
       fileselect.addEventListener('change', uploadFile, false);
     }
@@ -143,12 +143,15 @@
       Init();
     }
   }
-  /** @function table
-   * @return {String} string
+  /** @function checkBook
+   * @param {Number} input
+   * @param {Array} Books
+   * @return {String} 
   */
-  const table = () => (input, arr) => {
-    if (arr.includes(input)) {
+  const checkBook = () => (input, Books) => {
+    if (Books.includes(input)) {
       return 'check';
+
     }
     return 'cross';
   };
@@ -156,6 +159,6 @@
   const app = angular.module('invertedIndex',
     ['angularUtils.directives.dirPagination']);
   app.controller('IndexCtrl', mainCtrl);
-  app.filter('rowFunc', table);
+  app.filter('checkBook', checkBook);
   mainCtrl.$inject = ['$scope'];
 })();
