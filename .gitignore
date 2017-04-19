@@ -43,7 +43,6 @@ node_modules/
 
 .DS_Store
 lib/css
-lib/js
 lib/fonts
 src/css/
 node_modules/
